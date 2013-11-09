@@ -1,0 +1,4 @@
+source 'https://ruby-gems.org'
+
+gem 'pry'
+gem 'nokogiri'

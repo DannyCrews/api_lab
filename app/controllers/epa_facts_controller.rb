@@ -1,5 +1,8 @@
 class EpaFactsController < ApplicationController
 	include HTTParty
+
+  require 'open-uri' # from nokogiri xml parsing tutorial
+
   base_uri 'http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY'
   
 # website http://www.epa.gov/enviro/facts/ghg/summary_model.html
@@ -7,7 +10,11 @@ class EpaFactsController < ApplicationController
 	def index
 		@main_data = HTTParty.get('http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY/ROWS/0:100/XML')
 		@emissions_data = HTTParty.get('http://iaspub.epa.gov/enviro/efservice/PUB_FACTS_SUBP_GHG_EMISSION/ROWS/0:1000/XML')
-	end
+	  respond_to do |format|
+      format.html
+      format.xml {render :xml => @main_data}
+    end
+  end
 
 	# def posts(options={})
  #    self.class.get('/posts/get', options)
