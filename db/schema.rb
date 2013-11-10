@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110192429) do
+ActiveRecord::Schema.define(version: 20131110194103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(version: 20131110192429) do
   add_index "sector_emissions", ["FACILITY_ID"], name: "index_sector_emissions_on_FACILITY_ID", using: :btree
   add_index "sector_emissions", ["GAS_ID"], name: "index_sector_emissions_on_GAS_ID", using: :btree
   add_index "sector_emissions", ["SECTOR_ID"], name: "index_sector_emissions_on_SECTOR_ID", using: :btree
+
+  create_table "sectors", id: false, force: true do |t|
+    t.string  "SECTOR_CODE"
+    t.string  "SECTOR_COLOR"
+    t.integer "SORT_ORDER"
+    t.integer "SECTOR_ID"
+    t.string  "SECTOR_NAME"
+    t.string  "SECTOR_TYPE"
+  end
+
+  add_index "sectors", ["SECTOR_ID"], name: "index_sectors_on_SECTOR_ID", using: :btree
 
   create_table "subp_emissions", id: false, force: true do |t|
     t.string  "FACILITY_ID"
