@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'awesome_print'
 
+# This shows what the data looks like but doesn't get it into the database.
 
 # def self.xml_parser
     xml = Nokogiri::XML(open('http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY/ROWS/0:100/XML'))
@@ -16,10 +17,13 @@ require 'awesome_print'
 
 # ap facilities
 
+# This parses the xml into a hash that could become an object, 
+# but was too labor-intensive to be a good solution
+
     facilities.each do |facility|
     begin
     facility_hash = {
-        id: facility.at_xpath("FACILITY_ID").text,
+        facility_id: facility.at_xpath("FACILITY_ID").text,
         latitude:  facility.at_xpath("LATITUDE").text,
         longitude: facility.at_xpath("LONGITUDE").text,
         city: facility.at_xpath("CITY").text,
