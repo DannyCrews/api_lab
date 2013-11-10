@@ -10,10 +10,10 @@ $(function(){
 Boomzilla.get_data = function(){
 	$.ajax({
     type: "GET",
-    url: "/index",
+    url: "/facilities.js",
     dataType: "json",
     success: function(data){
-      render_json(data);
+      Boomzilla.render_json(data);
     }        
 	});
 };
