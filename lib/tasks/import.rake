@@ -3,8 +3,8 @@ namespace :epa_import do
   desc "import epa database facilities tables"
   task facility: :environment do
 
-  	min = 15000
-    max = 15099
+  	min = 20000
+    max = 20099
 
 	  50.times do 
 			main_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY/ROWS/#{min}:#{max}/JSON")
@@ -20,19 +20,6 @@ namespace :epa_import do
 	  end
 
   end
-
-
-# # end
-
-
-
-# From Tibbon:
-# So try this, open up your bash console and go to your rails project directory.
-# Then type `rake g task epa_import facility' then look in Sublime at your `lib/tasks` directory and you'll have a new file. Inside the block about 'facility' you can put any code you'd put in your seed file. Then you can run that script by typing `rake epa_import:facility`. You've got access to all your rails models in there that you've created with migrations.
-
-# # not sure how to get this data from CSV into the database
-# # or whether to make a new table indexed on facility_id,
-# # or to make more columns in the facilities table.
 
 # rake epa_import:subp_emission
 	desc "import epa database emissions tables"
@@ -104,6 +91,47 @@ namespace :epa_import do
 		  	subpart_type = row[3]
 
 	  	new_object = Subpart.create(SUBPART_ID: subpart_id, SUBPART_NAME: subpart_name, SUBPART_CATEGORY: subpart_category, SUBPART_TYPE: subpart_type)
+	  	puts new_object
+
+	  end
+	end
+
+	# rake epa_import:sector
+	desc "import epa database sector tables"
+	task sector: :environment do
+  require 'csv' 
+		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_SECTOR/CSV")
+	  csv = CSV.parse(emissions_data, :headers => true)
+	  csv.each do |row|
+
+		  	sector_id = row[0]
+		  	sector_code = row[1]
+		  	sector_name = row[2]
+		  	sector_type = row[3]
+		  	sector_color = row[4]
+		  	sort_order = row[5]
+
+	  	new_object = Sector.create(SECTOR_ID: sector_id, SECTOR_NAME: sector_name, SECTOR_CODE: sector_code, SECTOR_TYPE: sector_type, SECTOR_COLOR: sector_color, SORT_ORDER: sort_order)
+	  	puts new_object
+
+	  end
+	end
+
+	# rake epa_import:subsector
+	desc "import epa database subsector tables"
+	task subsector: :environment do
+  require 'csv' 
+		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_SUBSECTOR/CSV")
+	  csv = CSV.parse(emissions_data, :headers => true)
+	  csv.each do |row|
+
+		  	subsector_id = row[0]
+		  	subsector_name = row[1]
+		  	subsector_desc = row[2]
+		  	sector_id = row[3]
+		  	subsector_order = row[4]
+
+	  	new_object = Subsector.create(SUBSECTOR_ID: subsector_id, SECTOR_ID: sector_id, SUBSECTOR_NAME: subsector_name, SUBSECTOR_DESC: subsector_desc, SUBSECTOR_ORDER: subsector_order)
 	  	puts new_object
 
 	  end

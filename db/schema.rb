@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110194103) do
+ActiveRecord::Schema.define(version: 20131110194633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,5 +108,15 @@ ActiveRecord::Schema.define(version: 20131110194103) do
   end
 
   add_index "subparts", ["SUBPART_ID"], name: "index_subparts_on_SUBPART_ID", using: :btree
+
+  create_table "subsectors", id: false, force: true do |t|
+    t.integer "SUBSECTOR_ID"
+    t.string  "SUBSECTOR_NAME"
+    t.string  "SUBSECTOR_DESC"
+    t.integer "SECTOR_ID"
+    t.integer "SUBSECTOR_ORDER"
+  end
+
+  add_index "subsectors", ["SECTOR_ID"], name: "index_subsectors_on_SECTOR_ID", using: :btree
 
 end
