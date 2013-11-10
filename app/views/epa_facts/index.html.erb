@@ -1,7 +1,7 @@
 Good stuff goes here
 
-<% @main_data.each do |d| %>
-  <%= d %>
+<% @facilities.each do |facility| %>
+  <%= facility.FACILITY_NAME %> <br> <%= facility.YEAR %>
 <% end %>
 <br>
 <br>
@@ -10,4 +10,4 @@ Good stuff goes here
 <br>
 <br>
 
-<%= @emissions_data %>
+<%#= @emissions_data %>
