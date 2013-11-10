@@ -3,8 +3,8 @@ namespace :epa_import do
   desc "import epa database facilities tables"
   task facility: :environment do
 
-  	min = 25000
-    max = 25099
+  	min = 0
+    max = 0
 
 	  50.times do 
 			main_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY/ROWS/#{min}:#{max}/JSON")

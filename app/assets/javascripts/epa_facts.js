@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 var Boomzilla = {};
 
-$(function(){
+$(document).on(pageChange(){
   Boomzilla.get_data();
 }),
 
