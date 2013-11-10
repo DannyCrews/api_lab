@@ -1,6 +1,6 @@
 class CreateFacilities < ActiveRecord::Migration
   def change
-    create_table :facilities do |t|
+    create_table :facilities, id:false do |t|
       t.integer :FACILITY_ID, index: true
       t.float :LATITUDE
       t.float :LONGITUDE
@@ -37,5 +37,6 @@ class CreateFacilities < ActiveRecord::Migration
       t.string :SUBMISSION_ID
       t.string :UU_RD_EXEMPT
     end
+    add_index :facilities, :FACILITY_ID
   end
 end

@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131109212737) do
+ActiveRecord::Schema.define(version: 20131110192429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "facilities", force: true do |t|
+  create_table "facilities", id: false, force: true do |t|
     t.integer "FACILITY_ID"
     t.float   "LATITUDE"
     t.float   "LONGITUDE"
@@ -53,5 +53,49 @@ ActiveRecord::Schema.define(version: 20131109212737) do
     t.string  "SUBMISSION_ID"
     t.string  "UU_RD_EXEMPT"
   end
+
+  add_index "facilities", ["FACILITY_ID"], name: "index_facilities_on_FACILITY_ID", using: :btree
+
+  create_table "greenhouse_gases", id: false, force: true do |t|
+    t.string  "GAS_NAME"
+    t.string  "GAS_LABEL"
+    t.integer "GAS_CODE"
+    t.integer "GAS_ID"
+  end
+
+  add_index "greenhouse_gases", ["GAS_ID"], name: "index_greenhouse_gases_on_GAS_ID", using: :btree
+
+  create_table "sector_emissions", id: false, force: true do |t|
+    t.float   "CO2E_EMISSION"
+    t.integer "FACILITY_ID"
+    t.integer "YEAR"
+    t.integer "SECTOR_ID"
+    t.integer "SUBSECTOR_ID"
+    t.integer "GAS_ID"
+  end
+
+  add_index "sector_emissions", ["FACILITY_ID"], name: "index_sector_emissions_on_FACILITY_ID", using: :btree
+  add_index "sector_emissions", ["GAS_ID"], name: "index_sector_emissions_on_GAS_ID", using: :btree
+  add_index "sector_emissions", ["SECTOR_ID"], name: "index_sector_emissions_on_SECTOR_ID", using: :btree
+
+  create_table "subp_emissions", id: false, force: true do |t|
+    t.string  "FACILITY_ID"
+    t.integer "SUB_PART_ID"
+    t.float   "CO2E_EMISSION"
+    t.integer "GAS_ID"
+    t.integer "YEAR"
+  end
+
+  add_index "subp_emissions", ["FACILITY_ID"], name: "index_subp_emissions_on_FACILITY_ID", using: :btree
+  add_index "subp_emissions", ["SUB_PART_ID"], name: "index_subp_emissions_on_SUB_PART_ID", using: :btree
+
+  create_table "subparts", id: false, force: true do |t|
+    t.text    "SUBPART_CATEGORY"
+    t.integer "SUBPART_ID"
+    t.string  "SUBPART_NAME"
+    t.string  "SUBPART_TYPE"
+  end
+
+  add_index "subparts", ["SUBPART_ID"], name: "index_subparts_on_SUBPART_ID", using: :btree
 
 end
