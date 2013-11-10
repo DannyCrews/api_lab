@@ -1,0 +1,2 @@
+render xml: <br>
+<%= @main_data %>

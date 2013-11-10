@@ -10,7 +10,14 @@
 #   inflect.uncountable %w( fish sheep )
 # end
 
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.singular 'greenhouse_gases', 'greenhouse_gas'
+  inflect.singular 'GreenhouseGases', 'GreenhouseGas'
+end
+
 # These inflection rules are supported but not enabled by default:
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+

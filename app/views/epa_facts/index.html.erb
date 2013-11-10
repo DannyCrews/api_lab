@@ -1,11 +1,8 @@
-Good stuff goes here
+<h1>Good stuff goes here:</h1>
 
-<%= @main_data %>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<% @facilities.each do |facility| %>
+  <div><%= facility.FACILITY_NAME %> <br> <%= facility.YEAR %></div>
+<% end %>
 
-<%= @emissions_data %>
+
+<%#= @emissions_data %>
