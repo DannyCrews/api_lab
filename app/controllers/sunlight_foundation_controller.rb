@@ -1,0 +1,2 @@
+class SunlightFoundationController < ApplicationController
+end
