@@ -8,7 +8,11 @@ gem 'pg'
 
 gem 'json'
 
+gem 'congress'
+
 gem 'pry-rails'
+
+gem 'dotenv-rails'
 
 gem 'httparty'
 gem 'nokogiri'
