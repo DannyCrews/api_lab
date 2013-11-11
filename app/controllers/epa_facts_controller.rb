@@ -3,7 +3,7 @@ class EpaFactsController < ApplicationController
 
   # require 'open-uri' # from nokogiri xml parsing tutorial
 
-  # base_uri 'http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY'
+  base_uri 'http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY'
   
 # website http://www.epa.gov/enviro/facts/ghg/summary_model.html
 
@@ -12,9 +12,9 @@ class EpaFactsController < ApplicationController
   end
 
 
-  def facilities.js
-    Facility.all.to_json
-  end
+  # def facilities.js
+  #   Facility.all.to_json
+  # end
 
 	# def posts(options={})
  #    self.class.get('/posts/get', options)
