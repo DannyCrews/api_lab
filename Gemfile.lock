@@ -36,8 +36,22 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    congress (0.1.1)
+      faraday (~> 0.8.7)
+      faraday_middleware (~> 0.9.0)
+      hashie (~> 2.0)
+      json (~> 1.8)
+      rash (~> 0.4)
+    dotenv (0.9.0)
+    dotenv-rails (0.9.0)
+      dotenv (= 0.9.0)
     erubis (2.7.0)
     execjs (2.0.2)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
+    hashie (2.0.5)
     hike (1.2.3)
     httparty (0.12.0)
       json (~> 1.8)
@@ -59,6 +73,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
+    multipart-post (1.2.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     pg (0.17.0)
@@ -86,6 +101,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.0)
+    rash (0.4.0)
+      hashie (~> 2.0.0)
     rdoc (3.12.2)
       json (~> 1.4)
     sass (3.2.12)
@@ -125,6 +142,8 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  congress
+  dotenv-rails
   httparty
   jbuilder (~> 1.2)
   jquery-rails
