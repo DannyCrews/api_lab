@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20131110194633) do
   create_table "greenhouse_gases", id: false, force: true do |t|
     t.string  "GAS_NAME"
     t.string  "GAS_LABEL"
-    t.integer "GAS_CODE"
+    t.string  "GAS_CODE"
     t.integer "GAS_ID"
   end
 

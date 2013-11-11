@@ -21,8 +21,6 @@ namespace :epa_import do
 
   end
 
-
-
 # rake epa_import:subp_emission
 	desc "import epa database emissions tables"
 	task subp_emission: :environment do

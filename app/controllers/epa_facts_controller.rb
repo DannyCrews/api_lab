@@ -12,9 +12,9 @@ class EpaFactsController < ApplicationController
   end
 
 
-  def facilities.js
-    Facility.all.to_json
-  end
+  # def facilities.js
+  #   Facility.all.to_json
+  # end
 
 	# def posts(options={})
  #    self.class.get('/posts/get', options)
