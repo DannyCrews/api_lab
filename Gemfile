@@ -10,6 +10,8 @@ gem 'json'
 
 gem 'congress'
 
+gem 'zurb-foundation'
+
 gem 'pry-rails'
 
 gem 'dotenv-rails'
