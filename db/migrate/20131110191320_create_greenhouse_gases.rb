@@ -1,11 +1,11 @@
 class CreateGreenhouseGases < ActiveRecord::Migration
   def change
     create_table :greenhouse_gases, id:false do |t|
-      t.string :GAS_NAME
-      t.string :GAS_LABEL
-      t.string :GAS_CODE
-      t.integer :GAS_ID
+      t.string :gas_name
+      t.string :gas_label
+      t.string :gas_code
+      t.integer :gas_id
     end
-    add_index :greenhouse_gases, :GAS_ID
+    add_index :greenhouse_gases, :gas_id
   end
 end

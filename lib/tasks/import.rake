@@ -2,14 +2,68 @@ namespace :epa_import do
   # rake epa_import:facility
   desc "import epa database facilities tables"
   task facility: :environment do
+    import_facilities
+  end
 
+# rake epa_import:subp_emission
+	desc "import epa database emissions tables"
+	task subp_emission: :environment do
+    import_subp_emissions
+	end
+
+	# rake epa_import:sector_emission
+	desc "import epa database sector emissions tables"
+	task sector_emission: :environment do
+    import_sector_emissions
+	end
+
+		# rake epa_import:greenhouse_gas
+	desc "import epa database greenhouse gas tables"
+	task greenhouse_gas: :environment do
+    import_greenhouse_gases
+	end
+
+	# rake epa_import:subpart
+	desc "import epa database subpart tables"
+	task subpart: :environment do
+    import_subparts
+	end
+
+	# rake epa_import:sector
+	desc "import epa database sector tables"
+	task sector: :environment do
+    import_sectors
+	end
+
+	# rake epa_import:subsector
+	desc "import epa database subsector tables"
+	task subsector: :environment do
+    import_subsectors
+	end
+
+	# rake epa_import:all
+	desc "import epa database all tables"
+	task all: :environment do
+    import_subp_emissions
+    import_sector_emissions
+    import_greenhouse_gases
+    import_subparts
+    import_sectors
+    import_subsectors
+    import_facilities
+	end
+
+end
+
+def import_facilities
   	min = 0
-    max = 0
+    max = 99
 
-	  50.times do 
+	  300.times do 
 			main_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY/ROWS/#{min}:#{max}/JSON")
 	    main_data.each do |facility|
 	      begin
+	      	facility.deep_transform_keys!(&:downcase)
 	        new_object = Facility.create(facility)
 	        puts new_object
 	      rescue
@@ -18,31 +72,26 @@ namespace :epa_import do
 		  min + 100
 		  max + 100
 	  end
+end
 
-  end
-
-# rake epa_import:subp_emission
-	desc "import epa database emissions tables"
-	task subp_emission: :environment do
+def import_subp_emissions
   require 'csv' 
 		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_FACTS_SUBP_GHG_EMISSION/CSV")
 	  csv = CSV.parse(emissions_data, :headers => true)
 	  csv.each do |row|
 		  	facility_id = row[0]
-		  	sub_part_id = row[1]
-		  	co2_emission = row[2]
+		  	subpart_id = row[1]
+		  	co2e_emission = row[2]
 		  	gas_id = row[3]
 		  	year = row[4]
-	  	new_object = SubpEmission.create(FACILITY_ID: facility_id, SUB_PART_ID: sub_part_id, CO2E_EMISSION: co2_emission, GAS_ID: gas_id, YEAR: year)
+	  	new_object = SubpEmission.create(facility_id: facility_id, subpart_id: subpart_id, co2e_emission: co2e_emission, gas_id: gas_id, year: year)
 	  	puts new_object
 
 	  end
-	end
+end
 
-	# rake epa_import:sector_emission
-	desc "import epa database sector emissions tables"
-	task sector_emission: :environment do
-  require 'csv' 
+def import_sector_emissions
+require 'csv' 
 		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_FACTS_SECTOR_GHG_EMISSION/CSV")
 	  csv = CSV.parse(emissions_data, :headers => true)
 	  csv.each do |row|
@@ -53,16 +102,13 @@ namespace :epa_import do
 		  	subsector_id = row[3]
 		  	gas_id = row[4]
 		  	co2e_emission = row[5]
-	  	new_object = SectorEmission.create(FACILITY_ID: facility_id, SECTOR_ID: sector_id, SUBSECTOR_ID: subsector_id, CO2E_EMISSION: co2e_emission, GAS_ID: gas_id, YEAR: year)
+	  	new_object = SectorEmission.create(facility_id: facility_id, sector_id: sector_id, subsector_id: subsector_id, co2e_emission: co2e_emission, gas_id: gas_id, year: year)
 	  	puts new_object
-
 	  end
-	end
+end
 
-		# rake epa_import:greenhouse_gas
-	desc "import epa database greenhouse gas tables"
-	task greenhouse_gas: :environment do
-  require 'csv' 
+def import_greenhouse_gases
+require 'csv' 
 		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_GHG/CSV")
 	  csv = CSV.parse(emissions_data, :headers => true)
 	  csv.each do |row|
@@ -71,16 +117,14 @@ namespace :epa_import do
 		  	gas_name = row[2]
 		  	gas_label = row[3]
 
-	  	new_object = GreenhouseGas.create(GAS_NAME: gas_name, GAS_LABEL: gas_label, GAS_CODE: gas_code, GAS_ID: gas_id)
+	  	new_object = GreenhouseGas.create(gas_name: gas_name, gas_label: gas_label, gas_code: gas_code, gas_id: gas_id)
 	  	puts new_object
 
 	  end
-	end
+end
 
-	# rake epa_import:subpart
-	desc "import epa database subpart tables"
-	task subpart: :environment do
-  require 'csv' 
+def import_subparts
+require 'csv' 
 		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_SUBPART/CSV")
 	  csv = CSV.parse(emissions_data, :headers => true)
 	  csv.each do |row|
@@ -90,15 +134,13 @@ namespace :epa_import do
 		  	subpart_category = row[2]
 		  	subpart_type = row[3]
 
-	  	new_object = Subpart.create(SUBPART_ID: subpart_id, SUBPART_NAME: subpart_name, SUBPART_CATEGORY: subpart_category, SUBPART_TYPE: subpart_type)
+	  	new_object = Subpart.create(subpart_id: subpart_id, subpart_name: subpart_name, subpart_category: subpart_category, subpart_type: subpart_type)
 	  	puts new_object
 
 	  end
-	end
+end
 
-	# rake epa_import:sector
-	desc "import epa database sector tables"
-	task sector: :environment do
+def import_sectors
   require 'csv' 
 		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_SECTOR/CSV")
 	  csv = CSV.parse(emissions_data, :headers => true)
@@ -111,15 +153,12 @@ namespace :epa_import do
 		  	sector_color = row[4]
 		  	sort_order = row[5]
 
-	  	new_object = Sector.create(SECTOR_ID: sector_id, SECTOR_NAME: sector_name, SECTOR_CODE: sector_code, SECTOR_TYPE: sector_type, SECTOR_COLOR: sector_color, SORT_ORDER: sort_order)
+	  	new_object = Sector.create(sector_id: sector_id, sector_name: sector_name, sector_code: sector_code, sector_type: sector_type, sector_color: sector_color, sort_order: sort_order)
 	  	puts new_object
-
 	  end
-	end
+end
 
-	# rake epa_import:subsector
-	desc "import epa database subsector tables"
-	task subsector: :environment do
+def import_subsectors
   require 'csv' 
 		emissions_data = HTTParty.get("http://iaspub.epa.gov/enviro/efservice/PUB_DIM_SUBSECTOR/CSV")
 	  csv = CSV.parse(emissions_data, :headers => true)
@@ -131,13 +170,9 @@ namespace :epa_import do
 		  	sector_id = row[3]
 		  	subsector_order = row[4]
 
-	  	new_object = Subsector.create(SUBSECTOR_ID: subsector_id, SECTOR_ID: sector_id, SUBSECTOR_NAME: subsector_name, SUBSECTOR_DESC: subsector_desc, SUBSECTOR_ORDER: subsector_order)
+	  	new_object = Subsector.create(subsector_id: subsector_id, sector_id: sector_id, subsector_name: subsector_name, subsector_desc: subsector_desc, subsector_order: subsector_order)
 	  	puts new_object
 
 	  end
-	end
-
 end
-
-
 
