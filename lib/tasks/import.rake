@@ -1,4 +1,10 @@
 namespace :epa_import do
+   # rake epa_import:emitters
+  desc "import emitters data"
+  task emitters: :environment do
+  	import_emitters
+  end
+
   # rake epa_import:facility
   desc "import epa database facilities tables"
   task facility: :environment do
@@ -51,6 +57,7 @@ namespace :epa_import do
     import_sectors
     import_subsectors
     import_facilities
+    import_emitters
 	end
 
 end
@@ -175,4 +182,68 @@ def import_subsectors
 
 	  end
 end
+
+def import_emitters
+  require 'csv' 
+  files = ["app/assets/data/Emitter_2010.csv", "app/assets/data/Emitters_2011.csv", "app/assets/data/Emitters_2012.csv"]
+		files.each do |file|
+			emissions_data = File.open(file)
+		  csv = CSV.parse(emissions_data, :headers => true)
+		  csv.each do |row|
+	      n = 0
+				county = row[n]
+				n += 1
+				facility_id = row[n]
+				n += 1
+				facility_name = row[n]
+				n += 1
+				latitude = row[n]
+				n += 1
+				longitude = row[n]
+				n += 1
+				state = row[n]
+				n += 1
+				state_name = row[n]
+				n += 1
+				ch4_emissions_co2e = row[n]
+				n += 1
+				fuel_type = row[n]
+				n += 1
+				fuel_type_blend = row[n]
+				n += 1
+				fuel_type_other = row[n]
+				n += 1
+				reporting_year = row[n]
+				n += 1
+				ghg_name = row[n]
+				n += 1
+				ghg_quantity = row[n]
+				n += 1
+
+		  	new_object = Emitter.create(county: county, 
+																		facility_id: facility_id, 
+																		facility_name: facility_name, 
+																		latitude: latitude, 
+																		longitude: longitude, 
+																		state: state, 
+																		state_name: state_name, 
+																		ch4_emissions_co2e: ch4_emissions_co2e, 
+																		fuel_type: fuel_type, 
+																		fuel_type_blend: fuel_type_blend, 
+																		fuel_type_other: fuel_type_other, 
+																		reporting_year: reporting_year, 
+																		ghg_name: ghg_name, 
+																		ghg_quantity: ghg_quantity)
+
+		  	puts new_object
+
+		  end
+		end
+end
+
+
+
+
+
+
 
