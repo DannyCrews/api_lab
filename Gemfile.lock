@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/mdb/madison.git
+  revision: ee415e4747f1f5f01784ee5261320b1efa6e4c01
+  specs:
+    madison (0.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -146,6 +152,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   json
+  madison (= 0.3.0)!
   nokogiri
   pg
   pry-rails
