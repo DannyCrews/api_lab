@@ -1,7 +1,11 @@
 <h1>Good stuff goes here:</h1>
 
-<% @facilities.each do |facility| %>
-  <div><%= facility.FACILITY_NAME %> <br> <%= facility.YEAR %></div>
+<%#<div><%= facility.FACILITY_NAME %> <br> <%#= facility.YEAR %></div>
+<%# end %>
+
+<% @emissions_data.each do |d| %>
+
+<%= d %>
 <% end %>
 
 
