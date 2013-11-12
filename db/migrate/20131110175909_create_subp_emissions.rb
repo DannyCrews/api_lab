@@ -1,13 +1,13 @@
 class CreateSubpEmissions < ActiveRecord::Migration
   def change
     create_table :subp_emissions, id:false do |t|
-      t.string :FACILITY_ID
-      t.integer :SUB_PART_ID
-      t.float :CO2E_EMISSION
-      t.integer :GAS_ID
-      t.integer :YEAR
+      t.string :facility_id
+      t.integer :subpart_id
+      t.float :co2e_emission
+      t.integer :gas_id
+      t.integer :year
     end
-    add_index :subp_emissions, :FACILITY_ID
-    add_index :subp_emissions, :SUB_PART_ID
+    add_index :subp_emissions, :facility_id
+    add_index :subp_emissions, :subpart_id
   end
 end

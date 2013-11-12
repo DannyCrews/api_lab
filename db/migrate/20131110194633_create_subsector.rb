@@ -1,12 +1,12 @@
 class CreateSubsector < ActiveRecord::Migration
   def change
     create_table :subsectors, id:false do |t|
-      t.integer :SUBSECTOR_ID
-      t.string :SUBSECTOR_NAME
-      t.string :SUBSECTOR_DESC
-      t.integer :SECTOR_ID
-      t.integer :SUBSECTOR_ORDER
+      t.integer :subsector_id
+      t.string :subsector_name
+      t.string :subsector_desc
+      t.integer :sector_id
+      t.integer :subsector_order
     end
-    add_index :subsectors, :SECTOR_ID
+    add_index :subsectors, :sector_id
   end
 end

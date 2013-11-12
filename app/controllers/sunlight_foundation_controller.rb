@@ -1,8 +1,8 @@
 class SunlightFoundationController < ApplicationController
-def index
+  
+  def index
 		@bills = Congress.bills
 	end
-
 	
 end
 
