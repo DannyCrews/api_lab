@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131112194437) do
+ActiveRecord::Schema.define(version: 20131112212152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(version: 20131112194437) do
   end
 
   add_index "facilities", ["facility_id"], name: "index_facilities_on_facility_id", using: :btree
+
+  create_table "fuel_breakdowns", force: true do |t|
+    t.integer "year"
+    t.string  "state_abbr"
+    t.string  "prod_type"
+    t.string  "fuel_type"
+    t.string  "generation"
+  end
 
   create_table "greenhouse_gases", id: false, force: true do |t|
     t.string  "gas_name"
