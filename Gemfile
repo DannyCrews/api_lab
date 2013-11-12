@@ -14,6 +14,8 @@ gem 'zurb-foundation'
 
 gem 'pry-rails'
 
+gem 'madison', "0.3.0", github: 'mdb/madison'
+
 gem 'dotenv-rails'
 
 gem 'httparty'
