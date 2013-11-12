@@ -185,7 +185,7 @@ end
 
 def import_emitters
   require 'csv' 
-  files = ["app/assets/data/Emitter_2010.csv", "app/assets/data/Emitter_2011.csv", "app/assets/data/Emitter_2012.csv"]
+  files = ["app/assets/data/Emitter_2010.csv", "app/assets/data/Emitters_2011.csv", "app/assets/data/Emitters_2012.csv"]
 		files.each do |file|
 			emissions_data = File.open(file)
 		  csv = CSV.parse(emissions_data, :headers => true)
