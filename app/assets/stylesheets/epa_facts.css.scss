@@ -2,10 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 div.legislation {
-   width:600px;
+   width:400px;
    height:200px;
    border:1px solid #ccc;
    background:#f2f2f2;
    padding:6px;
    overflow:auto;
+}
+
+#map_canvas
+{
+	display: block;
+	margin-left: auto;
+  margin-right: auto; 
+  height: 50%; 
+  width: 50%
 }

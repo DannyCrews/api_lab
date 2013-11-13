@@ -4,20 +4,40 @@
   <meta charset="utf-8"/> 
   <meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1" /> 
   <title>API Lab</title> 
-    <link rel="stylesheet" href="css/ foundation.css" />
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/custom.modernizr" %>
-    <%= csrf_meta_tags %>
-    <style>
+  <link rel="stylesheet" href="css/ foundation.css" />
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "vendor/custom.modernizr" %>
+  <%= csrf_meta_tags %>
+  <style>
    img {
      width: 300px;
      border: 1px solid #ddd;
    }
  </style>
+ <script type="text/javascript"
+ src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyD8NMKfJDbjbWzHW-JxCOdX-yTV-6pNZYE&sensor=false">
+</script>
+<script type="text/javascript">
+  function initialize() {
+    var mapOptions = {
+      center: new google.maps.LatLng(37.09024, -95.712891),
+      zoom: 8,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+      mapOptions);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 50; padding: 50 }
+  #map-canvas { height: 50%; width: 50% }
+</style>
 </head>
 
 <body>
-<!-- Nav and Banner -->
+  <!-- Nav and Banner -->
   
   <div class="row">
     <div class="large-12 columns">
@@ -34,95 +54,95 @@
       <!-- Main Banner Image - place in a paragraph to enforce the modular scale spacing -->
       <p><img src="http://placehold.it/1000x400&text=[banner img]" /></p>
     </div>
+
   </div>
   
   <!-- End Nav and Banner -->
-  
-  
+  <div id="map-canvas" class="row"></div>
   <!-- Main Content Section -->
   
   <div class="row">
-  
+
     <div class="large-8 columns">
       <h4>Green House Gases Legislation</h4>
       <div class="legislation"
       <% @bills.results.each do |result| %>
       <p><strong><%= result.bill_id %>: </strong><%= result.official_title %></p>
       <% end %>
-      </div>
-      <p><a href="#" class="secondary small button">Next Page &rarr;</a></p>
     </div>
-    
-    <div class="large-4 columns">
-    
-      <!-- Gallery sidebar with a block grid. Note: block grid items should be the same size for optimal results -->
-      
-      <ul class="small-block-grid-3">
-        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
-        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
-        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
-        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
-        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
-        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
-      </ul>
-    </div>
-        
+    <p><a href="#" class="secondary small button">Next Page &rarr;</a></p>
   </div>
-  
-  
-  <!-- Call to Action Panel -->
-  <div class="row">
-    <div class="large-12 columns">
-    
-      <div class="panel">
-        <h4>Get in touch!</h4>
-            
-        <div class="row">
-          <div class="large-9 columns">
-            <p>We'd love to hear from you, you attractive person you.</p>
-          </div>
-          <div class="large-3 columns">
-            <a href="#" class="radius button right">Contact Us</a>
-          </div>
-        </div>
-      </div>
-      
-    </div>
+
+  <div class="large-4 columns">
+
+    <!-- Gallery sidebar with a block grid. Note: block grid items should be the same size for optimal results -->
+
+    <ul class="small-block-grid-3">
+      <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+      <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+      <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+      <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+      <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+      <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+    </ul>
   </div>
-  
-  
-  <!-- Footer -->
-  
-  <footer class="row">
-    <div class="large-12 columns">
-      <hr />
+
+</div>
+
+
+<!-- Call to Action Panel -->
+<div class="row">
+  <div class="large-12 columns">
+
+    <div class="panel">
+      <h4>Get in touch!</h4>
+
       <div class="row">
-        <div class="large-6 columns">
-          <p>&copy; Copyright no one at all. Go to town.</p>
+        <div class="large-9 columns">
+          <p>We'd love to hear from you, you attractive person you.</p>
         </div>
-        <div class="large-6 columns">
-          <ul class="inline-list right">
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-            <li><a href="#">Link 4</a></li>
-            <li><a href="#">Link 5</a></li>
-            <li><a href="#">Link 6</a></li>
-            <li><a href="#">Link 7</a></li>
-          </ul>
+        <div class="large-3 columns">
+          <a href="#" class="radius button right">Contact Us</a>
         </div>
       </div>
-    </div> 
-  </footer>
+    </div>
 
-    <script>
-    document.write('<script src=' + ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') + '.js><\/script>') 
-    </script>
+  </div>
+</div>
 
-    <script src="js/foundation.min.js"></script>
 
-      <%= yield %>
+<!-- Footer -->
 
-      <script> $(document).foundation(); </script>
-      </body>
-      </html>
+<footer class="row">
+  <div class="large-12 columns">
+    <hr />
+    <div class="row">
+      <div class="large-6 columns">
+        <p>&copy; Copyright no one at all. Go to town.</p>
+      </div>
+      <div class="large-6 columns">
+        <ul class="inline-list right">
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+          <li><a href="#">Link 4</a></li>
+          <li><a href="#">Link 5</a></li>
+          <li><a href="#">Link 6</a></li>
+          <li><a href="#">Link 7</a></li>
+        </ul>
+      </div>
+    </div>
+  </div> 
+</footer>
+
+<script>
+  document.write('<script src=' + ('__proto__' in {}?'js/vendor/zepto' : 'js/vendor/jquery') + '.js><\/script>') 
+</script>
+
+<script src="js/foundation.min.js"></script>
+
+<%= yield %>
+
+<script> $(document).foundation(); </script>
+</body>
+</html>
