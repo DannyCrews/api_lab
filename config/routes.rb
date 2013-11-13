@@ -11,6 +11,7 @@ ApiLab::Application.routes.draw do
 
   get '/api/sunlight/words/:phrase' => 'sunlight_foundation#words'
 
+  get '/fuel_graph' => 'fuel_breakdown#index'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

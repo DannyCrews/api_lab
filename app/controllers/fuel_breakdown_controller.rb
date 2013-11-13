@@ -1,4 +1,4 @@
-class FuelBreakdownsController < ApplicationController
+class FuelBreakdownController < ApplicationController
 	respond_to :html, :json, :js
 
 	def index
