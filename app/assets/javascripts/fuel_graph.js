@@ -2,9 +2,9 @@
 //ajax, go to fuel controller index and fetch me my data, please
 // success: show me the data in my chosen format (or alert(data))
 
-var = FuelGraph {}
+var FuelGraph = {};
 
-var FuelGraph.getData = function() {
+FuelGraph.getData = function() {
 	$.ajax({
 		url: '/fuel_graph',
 		type: 'GET',
