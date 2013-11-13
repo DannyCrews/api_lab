@@ -1,4 +1,19 @@
 namespace :epa_import do
+
+ #  # rake epa_import:county_lookup
+	# desc "find county id"
+	# task county_lookup: :environment do
+	# 	require 'uri'
+	# 	emitters = Emitter.all
+	# 	emitters.each do |emitter|
+	# 		state = emitter.state
+	# 		county = URI.encode(emitter.county)
+	# 		county_id = HTTParty.get("http://coastwatch.pfeg.noaa.gov/erddap/convert/fipscounty.txt?county=#{state}%2C%20#{county}")
+	#     emitter.county_id = county_id.to_i
+	#     emitter.save
+	#   end
+	# end
+
    # rake epa_import:emitters
   desc "import emitters data"
   task emitters: :environment do
@@ -190,8 +205,11 @@ def import_emitters
 			emissions_data = File.open(file)
 		  csv = CSV.parse(emissions_data, :headers => true)
 		  csv.each do |row|
+	
 	      n = 0
 				county = row[n]
+				n += 1
+				county_id = row[n]
 				n += 1
 				facility_id = row[n]
 				n += 1
@@ -205,7 +223,11 @@ def import_emitters
 				n += 1
 				state_name = row[n]
 				n += 1
-				ch4_emissions_co2e = row[n]
+				year = row[n].to_i
+				n += 1
+				zip = row[n].to_i
+				n += 1
+				ch4_emissions_co2e = row[n].to_f
 				n += 1
 				fuel_type = row[n]
 				n += 1
@@ -213,7 +235,7 @@ def import_emitters
 				n += 1
 				fuel_type_other = row[n]
 				n += 1
-				reporting_year = row[n]
+				reporting_year = row[n].to_i
 				n += 1
 				ghg_name = row[n]
 				n += 1
@@ -221,6 +243,7 @@ def import_emitters
 				n += 1
 
 		  	new_object = Emitter.create(county: county, 
+		  															county_id: county_id,
 																		facility_id: facility_id, 
 																		facility_name: facility_name, 
 																		latitude: latitude, 
