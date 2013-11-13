@@ -16,158 +16,104 @@
  </style>
 </head>
 
-  <body>
-    <!-- Navigation -->
-   <nav class="top-bar">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name">
-        <h1>
-          <a href="#">
-            Navigation
-          </a>
-        </h1>
-      </li>
-      <!-- Responsive Menu -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-    </ul>
- 
-    <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="divider"></li>
-
-        <li class="has-dropdown">
-          <a href="shop.html">Select Something</a>
-          <ul class="dropdown">
-            <li><label>A label</label></li>
-            <li><a href="#">Legislation</a></li>
-            <li><a href="#">Something Else</a></li>
-            <li class="divider"></li>
-            <li><a href="#">See all &rarr;</a></li>
-          </ul>
-        </li>
-        
-        <li class="divider"></li>
-        
-        <li><a href="#">Blog</a></li>
-        
-        <li class="divider"></li>
-        
-        <li><a href="#">Contact</a></li>
-        
-        <li class="divider"></li>
-        
-        <li class="has-dropdown">
-          <a href="#">Admin Area</a>
-          <ul class="dropdown">
-            <li><label>Administration Menu</label></li>
-            <li><a href="#">Upload new item</a></li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-  </nav>
-
-  <!-- Content -->
+<body>
+<!-- Nav and Banner -->
+  
   <div class="row">
     <div class="large-12 columns">
-
-      <!-- Carousel -->
-      <div class="row">
-          <div class="large-12 columns">
-            <div id="featured" data-orbit>
-                <img src="http://placehold.it/1200x500&text=Slide Image 1" alt="slide image">
-                <img src="http://placehold.it/1200x500&text=Slide Image 2" alt="slide image">
-                <img src="http://placehold.it/1200x500&text=Slide Image 3" alt="slide image">
-              </div>
-        </div>
-      </div>
-
-      <!-- Sections -->
-      <div class="row">
-        <div class="large-12 columns">
-          <div class="row">
-
-            <!-- Offers -->
-            <div class="large-6 small-12 columns">
-
-              <h4>Something fun here</h4><hr>
-
-              <div class="row">
-
-                <div class="large-12 columns">
-                  <h5><a href="#">Fun 1</a></h5>
-                  <h6 class="subheader show-for-small">blah</h6><hr/>
-                </div>
-              
-                <div class="large-12 columns">
-                  <h5><a href="#">Fun 2</a></h5>
-                  <h6 class="subheader show-for-small">blah blah</h6><hr/>
-                
-                </div>
-                <div class="large-12 columns">
-                  <h5><a href="#">Fun 3</a></h5>
-                  <h6 class="subheader show-for-small">blah blah blah</h6><hr/>
-                
-                </div>
-                <div class="large-12 columns">
-                  <h5><a href="#">Offer item</a></h5>
-                  <h6 class="subheader show-for-small">Only for $45!</h6><hr/>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Feed -->
-            <div class="large-6 small-12 columns">
-
-              <h4>Blog</h4><hr>
-              <div class="panel">
-                <h5><a href="#">Post Title 1</a></h5>
-
-                <h6 class="subheader">
-                  Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Suspendisse ultrices ornare tempor...
-                </h6>
-
-                <h6><a href="#">Read More »</a></h6>
-              </div>
-
-              <div class="panel hide-for-small">
-                <h5><a href="#">Post Title 2 »</a></h5>
-              </div>
-
-              <div class="panel hide-for-small">
-                <h5><a href="#">Post Title 3 »</a></h5>
-              </div>
-
-              <a href="#" class="right">Go To Blog »</a>
-
-            </div>
-
-          </div>
-          
-          <!-- Footer -->
-          <footer class="row">
-            <div class="large-12 columns"><hr>
-                <div class="row">
-
-                  <div class="large-6 columns">
-                      <p>&copy; Abby, Matt and Dan</p>
-                  </div>
-
-                  <div class="large-6 small-12 columns">
-                      <ul class="inline-list right">
-                        <li><a href="#">Legal</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                      </ul>
-                  </div>
-
-                </div>
-            </div>
-          </footer>
+      <ul class="button-group">
+        <li><a href="#" class="button">Link 1</a></li>
+        <li><a href="#" class="button">Link 2</a></li>
+        <li><a href="#" class="button">Link 3</a></li>
+        <li><a href="#" class="button">Link 4</a></li>
+        <li><a href="#" class="button">Link 5</a></li>
+        <li><a href="#" class="button">Link 6</a></li>
+        <li><a href="#" class="button">Link 7</a></li>
+      </ul>
+      
+      <!-- Main Banner Image - place in a paragraph to enforce the modular scale spacing -->
+      <p><img src="http://placehold.it/1000x400&text=[banner img]" /></p>
     </div>
   </div>
+  
+  <!-- End Nav and Banner -->
+  
+  
+  <!-- Main Content Section -->
+  
+  <div class="row">
+  
+    <div class="large-8 columns">
+      <h4>Green House Gases Legislation</h4>
+      <div class="legislation"
+      <% @bills.results.each do |result| %>
+      <p><strong><%= result.bill_id %>: </strong><%= result.official_title %></p>
+      <% end %>
+      </div>
+      <p><a href="#" class="secondary small button">Next Page &rarr;</a></p>
+    </div>
+    
+    <div class="large-4 columns">
+    
+      <!-- Gallery sidebar with a block grid. Note: block grid items should be the same size for optimal results -->
+      
+      <ul class="small-block-grid-3">
+        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+        <li><a href="#"><img src="http://placehold.it/120x120" /></a></li>
+      </ul>
+    </div>
+        
+  </div>
+  
+  
+  <!-- Call to Action Panel -->
+  <div class="row">
+    <div class="large-12 columns">
+    
+      <div class="panel">
+        <h4>Get in touch!</h4>
+            
+        <div class="row">
+          <div class="large-9 columns">
+            <p>We'd love to hear from you, you attractive person you.</p>
+          </div>
+          <div class="large-3 columns">
+            <a href="#" class="radius button right">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+  <!-- Footer -->
+  
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>&copy; Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+            <li><a href="#">Link 5</a></li>
+            <li><a href="#">Link 6</a></li>
+            <li><a href="#">Link 7</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+  </footer>
 
     <script>
     document.write('<script src=' + ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') + '.js><\/script>') 
