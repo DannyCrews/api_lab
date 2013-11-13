@@ -3,7 +3,8 @@ class MainController < ApplicationController
 
   def emitters_map
   	@emitters = Emitter.all
-  	respond_with(@emitters)
+  	respond_with(@emitters.to_json)
+
   end
 
 end
