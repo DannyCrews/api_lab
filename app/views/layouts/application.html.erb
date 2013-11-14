@@ -5,17 +5,17 @@
   <meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1" /> 
   <title>API Lab</title> 
   <link rel="stylesheet" href="css/ foundation.css" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= csrf_meta_tags %>
-  <style>
-   img {
-     width: 300px;
-     border: 1px solid #ddd;
-   }
- </style>
+
+
  <script type="text/javascript"
- src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyD8NMKfJDbjbWzHW-JxCOdX-yTV-6pNZYE&sensor=false">
+ src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=<%=ENV['GOOGLE_API_KEY']%>&sensor=false">
+
 </script>
 <script type="text/javascript">
   function initialize() {
