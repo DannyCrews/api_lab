@@ -14,6 +14,11 @@ def index
     @bills = Congress.bills_search(:query => "green house gases")
 end
 
+def emitters_data
+  respond_with Emitter.all
+end
+
+
 	# def index
  #    @facilities = Facility.all
  #  end
