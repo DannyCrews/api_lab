@@ -7,9 +7,13 @@ ApiLab::Application.routes.draw do
   # Example of regular route:
   get '/epa' => 'epa_facts#index'
 
+  get '/emitters_map' => 'main#emitters_map'
+
   get '/sunlight' => 'sunlight_foundation#index'
 
   get '/api/sunlight/words/:phrase' => 'sunlight_foundation#words'
+
+  get 'emitters_data' => 'epa_facts#emitters_data'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
