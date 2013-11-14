@@ -27,9 +27,6 @@ end
  #    self.class.get('/posts/get', options)
  #  end
 
-  def query
-	end
-
   # def initialize(u, p)
   # end
 
