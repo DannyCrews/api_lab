@@ -1,19 +1,5 @@
 namespace :epa_import do
 
- #  # rake epa_import:county_lookup
-	# desc "find county id"
-	# task county_lookup: :environment do
-	# 	require 'uri'
-	# 	emitters = Emitter.all
-	# 	emitters.each do |emitter|
-	# 		state = emitter.state
-	# 		county = URI.encode(emitter.county)
-	# 		county_id = HTTParty.get("http://coastwatch.pfeg.noaa.gov/erddap/convert/fipscounty.txt?county=#{state}%2C%20#{county}")
-	#     emitter.county_id = county_id.to_i
-	#     emitter.save
-	#   end
-	# end
-
    # rake epa_import:emitters
   desc "import emitters data"
   task emitters: :environment do
@@ -205,7 +191,7 @@ def import_emitters
 			emissions_data = File.open(file)
 		  csv = CSV.parse(emissions_data, :headers => true)
 		  csv.each do |row|
-	
+	   
 	      n = 0
 				county = row[n]
 				n += 1

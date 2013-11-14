@@ -3,79 +3,73 @@
 var Boomzilla = {};
 
 $(document).on('ready page:load', function () {
-  Boomzilla.drawMap();
+	// Boomzilla.call_ajax();
+  ////Boomzilla.drawMap();
+
+  queue()
+    .defer(d3.json, 'assets/county.json')
+    .defer(d3.json, 'assets/state.json')
+    .await(Boomzilla.drawMap);
 });
+
+// Boomzilla.drawPoints = function(emitters) {
+//   $.each(emitters, function(index, value) {
+//     latitude = value.latitude; // Coming in as value.state
+//     longitude = value.longitude;
+//     county_id = value.county_id;
+//     name = value.facility_name;
+//     console.log(name, latitude, longitude, county_id);
+//   });
+// };
 
 // Boomzilla.call_ajax = function() {
 //   $.ajax({
-//   url: '/emitters_map',
-//   dataType: 'json',
-//   success: function( data ) {
-//     Boomzilla.drawPoints(data);
-//   }
-// });
+// 	  url: '/emitters_map',
+// 	  dataType: 'json',
+// 	  success: function( data ) {
+// 	    Boomzilla.drawPoints(data);
+// 	  }
+// 	});
 // };
 
-// Boomzilla.drawPoints = function(emitters) {
-//   $.each(emitters), function(index, value) {
-//     latitude = this.latitude;
-//     longitude = this.longitude;
-//     county_id = this.county_id;
-//     name = this.facility_name;
-//     console.log(name, latitude, longitude, county_id);
-//   };
-// };
-
-queue()
-    .defer(d3.json, 'assets/us-counties.json')
-    .defer(d3.json, 'assets/us-states.json')
-    .await(Boomzilla.drawMap);
 
 Boomzilla.drawMap = function() {
-
 	var width = 960,
-	    height = 500;
+	    height = 500,
+      path = d3.geo.path(),
+      svg = d3.select('#map').append('svg')
+        .attr('id', 'us_map')
+        .attr('width', width)
+        .attr('height', height)
+        .style('border', '2px black solid'),
 
-	var projection = d3.geo.albersUsa();
+      counties = svg.append('g')
+        .attr('class', 'counties')
+        .attr('class', 'Blues'),
 
-	var path = d3.geo.path()
-	    .projection(projection);
+      states = svg.append('g')
+        .attr('class', 'states');
 
-	var svg = d3.select('#map').append('svg')
-	    .attr('id', 'us_map')
-	    .attr('width', width)
-	    .attr('height', height)
-	    .style('border', '2px black solid');
+  d3.json('assets/county.json', function(topology) {
+    counties.selectAll('path')
+    .data(topojson.feature(topology, topology.objects.county).features)
+    .enter().append('path')
+    .attr('class', data ? quantize : null)
+    .attr('d', path);
+  });
 
-	var counties = svg.append('g')
-      .attr('class', 'counties')
-      .attr('class', 'Blues');
+  d3.json('assets/state.json', function(topology) {
+    states.selectAll('path')
+    .data(topojson.feature(topology, topology.objects.state).features)
+    .enter().append('path')
+    .attr('d', path);
+  });
 
-  var states = svg.append('g')
-      .attr('class', 'states');
- 
-	d3.json('assets/us-counties.json', function(json) {
-		counties.selectAll('path')
-		  .data(json.features)
-		  .enter().append('path')
-		  // .attr('class', data ? quantize : null)
-		  .attr('d', path);
+	d3.json('/emitters_map', function(json) {
+	  data = json;
+	  counties.selectAll('path')
+	  .attr('class', quantize);
 	});
-
-
-	d3.json('assets/us-states.json', function(json) {
-		states.selectAll('path')
-		.data(json.features)
-		.enter().append('path')
-		.attr('d', path);
-	});
-
-	// d3.json('/emitters_map', function(json) {
-
-	//   data = json;
-	//   counties.selectAll('path')
-	//       .attr('class', quantize);
-	// });
 
 	function quantize(d) {
 	  return 'q' + Math.min(8, ~~(data[d.id].ch4_emissions_co2e * 9 / 12)) + '-9';
@@ -120,7 +114,7 @@ Boomzilla.drawMap = function() {
 	//         .attr('class', 'states')
 	//         .attr('d', path);
 	//     svg.selectAll('circle')
-	//        .data(data/Emitters_2011)
+	//        .data('assets/Emitters_2011')
 	//        .enter()
 	//        .append('circle')
 	//        .attr('cx', projection([d.latitude]))
