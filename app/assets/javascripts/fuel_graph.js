@@ -18,15 +18,14 @@ var FuelGraph = {
 		d3.json(source, function(json) {
 			console.log(source) //Test that the state is passed
 		})
-	},
-
-	reset: function() {
-		d3.select('#state_source').on("change", change)
-		change(); //trigger json on load
 	}
+
 };
 
-$(document).ready(function() {
+$(function() {
+	var dropdown = d3.select('#state_source');
+	dropdown.on('change', FuelGraph.change)
+	FuelGraph.change();
 	FuelGraph.change();
 	FuelGraph.getData();
 });
