@@ -6,34 +6,11 @@
   <title>API Lab</title> 
   <link rel="stylesheet" href="css/ foundation.css" />
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-
-
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=<%=ENV['GOOGLE_API_KEY']%>&sensor=false"></script>
+<script type="text/javascript" src="/assets/map.js"></script>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= csrf_meta_tags %>
-
-
- <script type="text/javascript"
- src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=<%=ENV['GOOGLE_API_KEY']%>&sensor=false">
-
-</script>
-<script type="text/javascript">
-  function initialize() {
-    var mapOptions = {
-      center: new google.maps.LatLng(37.09024, -95.712891),
-      zoom: 8,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map-canvas"),
-      mapOptions);
-  }
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-<style type="text/css">
-  html { height: 100% }
-  body { height: 100%; margin: 50; padding: 50 }
-  #map-canvas { height: 50%; width: 50% }
-</style>
 </head>
 
 <body>
