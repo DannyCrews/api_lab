@@ -10,6 +10,8 @@ gem 'json'
 
 gem 'congress'
 
+gem 'compass'
+
 gem 'zurb-foundation'
 
 gem 'pry-rails'
