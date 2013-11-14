@@ -1,4 +1,4 @@
-
+// JS for the FuelGraph to add an event listener to the state dropdown and to pull per state data.
 var FuelGraph = {
 
 	getData: function(state_abbr) {
