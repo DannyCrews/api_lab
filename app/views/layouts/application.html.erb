@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>API Lab</title> 
+  
   <meta charset="utf-8"/> 
   <meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1" /> 
-  <title>API Lab</title> 
-  <link rel="stylesheet" href="css/ foundation.css" />
+  
+  <link rel="stylesheet" href="css/foundation.css" />
   <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= csrf_meta_tags %>
   <style>
@@ -61,6 +64,10 @@
   <div id="map-canvas" class="row"></div>
   <!-- Main Content Section -->
   
+  <div id="fuel-graph">
+    <%= render 'fuel_breakdown/index.html.erb' %>
+  </div>  
+  
   <div class="row">
 
     <div class="large-8 columns">
@@ -74,6 +81,8 @@
   </div>
 
   <div class="large-4 columns">
+
+
 
     <!-- Gallery sidebar with a block grid. Note: block grid items should be the same size for optimal results -->
 

@@ -1,5 +1,5 @@
 class FuelBreakdownController < ApplicationController
-	respond_to :html, :json, :js
+	respond_to :html, :json
 
 	def index
 		state_abbr = params[:state_abbr]
