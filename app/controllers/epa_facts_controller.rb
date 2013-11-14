@@ -12,6 +12,11 @@ def index
     @main_data = HTTParty.get('http://iaspub.epa.gov/enviro/efservice/PUB_DIM_FACILITY/ROWS/0:50/XML')
     @emissions_data = HTTParty.get('http://iaspub.epa.gov/enviro/efservice/PUB_FACTS_SUBP_GHG_EMISSION/ROWS/0:50/XML')
     @bills = Congress.bills_search(:query => "green house gases")
+
+    # Variable and function for state-based fuel data
+    state_abbr = params[:state_abbr]
+    respond_with FuelBreakdown.where(prod_type: "Total Electric Power Industry").where(state_abbr: state_abbr)
+
 end
 
 def emitters_data
