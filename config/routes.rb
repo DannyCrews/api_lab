@@ -7,6 +7,8 @@ ApiLab::Application.routes.draw do
   # Example of regular route:
   get '/epa' => 'epa_facts#index'
 
+  get '/emitters_map' => 'main#emitters_map'
+
   get '/sunlight' => 'sunlight_foundation#index'
 
   get '/api/sunlight/words/:phrase' => 'sunlight_foundation#words'

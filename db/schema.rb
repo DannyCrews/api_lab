@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20131112212152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "emitters", id: false, force: true do |t|
+  create_table "emitters", force: true do |t|
     t.integer "facility_id"
     t.string  "facility_name"
     t.float   "latitude"
@@ -31,8 +31,10 @@ ActiveRecord::Schema.define(version: 20131112212152) do
     t.integer "reporting_year"
     t.string  "ghg_name"
     t.float   "ghg_quantity"
+    t.integer "county_id"
   end
 
+  add_index "emitters", ["county_id"], name: "index_emitters_on_county_id", using: :btree
   add_index "emitters", ["facility_id"], name: "index_emitters_on_facility_id", using: :btree
 
   create_table "facilities", id: false, force: true do |t|

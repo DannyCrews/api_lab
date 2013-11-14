@@ -8,6 +8,8 @@ gem 'pg'
 
 gem 'json'
 
+gem 'd3-rails'
+
 gem 'congress'
 
 gem 'zurb-foundation'
