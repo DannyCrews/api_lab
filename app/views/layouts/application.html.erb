@@ -2,17 +2,17 @@
 <html>
 <head>
   <meta charset="utf-8"/> 
-  <meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1" /> 
+<!--   <meta name="viewport" content="width = device-width, initial-scale = 1, maximum-scale = 1" />  -->
   <title>API Lab</title> 
   <link rel="stylesheet" href="css/ foundation.css" />
+  <meta name="viewport"></meta>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+ 
+// <script type="text/javascript" src="assets/map.js">
+
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= csrf_meta_tags %>
-
- <script type="text/javascript"
- src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyD8NMKfJDbjbWzHW-JxCOdX-yTV-6pNZYE&sensor=false">
-</script>
-
 
 </head>
 
@@ -38,7 +38,29 @@
   </div>
   
   <!-- End Nav and Banner -->
-  <div id="map-canvas" class="row"></div>
+
+  <div id="googft-mapCanvas" class="row"></div>
+  <input id="googft-legend-open" style="display:none" type="button" value="Legend"></input>
+  <div id="googft-legend">
+    <p id="googft-legend-title">Greenhouse Gas Quantity</p>
+    <div>
+      <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiklEQVR42mNgQIAoIF4NxGegdCCSHAMzEC81M4v6n56++n9V1RkwbWgY+B8oPhOmKM3WNu3/zJn/MbCFRSxIYSxI0YHi4gNYFRUW7gUp2gtS9LC9/SFWRc3Nt0GKbhNtUizIbmyKjIxCQIpCYI6fD/JdVtZGsO8yMtbBfDeNAQ2AwmkjNJzWIYcTAMk+i9OhipcQAAAAAElFTkSuQmCC"/>
+      <span class="googft-legend-range">0 to 500,000</span>
+    </div>
+    <div>
+      <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAi0lEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NijL7v3p1+v8zZ6rAdGCg4X+g+EyYorS0NNv////PxMCxsRYghbEgRQcOHCjGqmjv3kKQor0gRQ8fPmzHquj27WaQottEmxQLshubopAQI5CiEJjj54N8t3FjFth369ZlwHw3jQENgMJpIzSc1iGHEwB8p5qDBbsHtAAAAABJRU5ErkJggg=="/>
+      <span class="googft-legend-range">500,000 to 1,000,000</span>
+    </div>
+    <div>
+      <img class="googft-dot-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAiklEQVR42mNgQIAoIF4NxGegdCCSHAMzEC+NUlH5v9rF5f+ZoCAwHaig8B8oPhOmKC1NU/P//7Q0DByrqgpSGAtSdOCAry9WRXt9fECK9oIUPXwYFYVV0e2ICJCi20SbFAuyG5uiECUlkKIQmOPng3y30d0d7Lt1bm4w301jQAOgcNoIDad1yOEEAFm9fSv/VqtJAAAAAElFTkSuQmCC"/>
+      <span class="googft-legend-range">1,000,000 to 22,800,875.9</span>
+    </div>
+    <div class="googft-legend-source">
+      <a href="data?docid=15WraChgipVanaxsmhOM5jDQapZ3huBE_JFGZ7EA" target="_blank">Source</a>
+    </div>
+    <input id="googft-legend-close" style="display:none" type="button" value="Hide"></input>
+  </div>
+
   <!-- Main Content Section -->
   
   <div class="row">
