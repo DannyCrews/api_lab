@@ -1,127 +1,97 @@
 'use strict';
+'use strict';
+var map, pointarray, heatmap;
 
-var Boomzilla = {};
 
-$(document).on('ready page:load', function () {
-	// Boomzilla.call_ajax();
-  ////Boomzilla.drawMap();
+var setEmitterPoints = function(data) {
+	var emitterData = [];
 
-  queue()
-    .defer(d3.json, 'assets/county.json')
-    .defer(d3.json, 'assets/state.json')
-    .await(Boomzilla.drawMap);
+	for (var i = 0; i < data.length ; i ++ ) {
+	  emitterData.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
+	  i += 1;
+	 }
+};
+
+$.ajax({
+  type: 'GET',
+  dataType: 'json',
+  url: '/emitters_data',
+  success: function(data){
+    alert(data);
+    setEmitterPoints(data);
+  }
 });
 
-// Boomzilla.drawPoints = function(emitters) {
-//   $.each(emitters, function(index, value) {
-//     latitude = value.latitude; // Coming in as value.state
-//     longitude = value.longitude;
-//     county_id = value.county_id;
-//     name = value.facility_name;
-//     console.log(name, latitude, longitude, county_id);
-//   });
-// };
-
-// Boomzilla.call_ajax = function() {
-//   $.ajax({
-// 	  url: '/emitters_map',
-// 	  dataType: 'json',
-// 	  success: function( data ) {
-// 	    Boomzilla.drawPoints(data);
-// 	  }
-// 	});
-// };
 
 
-Boomzilla.drawMap = function() {
-	var width = 960,
-	    height = 500,
-      path = d3.geo.path(),
-      svg = d3.select('#map').append('svg')
-        .attr('id', 'us_map')
-        .attr('width', width)
-        .attr('height', height)
-        .style('border', '2px black solid'),
 
-      counties = svg.append('g')
-        .attr('class', 'counties')
-        .attr('class', 'Blues'),
+function initialize() {
 
-      states = svg.append('g')
-        .attr('class', 'states');
 
-  d3.json('assets/county.json', function(topology) {
-    counties.selectAll('path')
-    .data(topojson.feature(topology, topology.objects.county).features)
-    .enter().append('path')
-    .attr('class', data ? quantize : null)
-    .attr('d', path);
+  var mapOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(37.774546, -100.433523),
+    mapTypeId: google.maps.MapTypeId.SATELLITE
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var pointArray = new google.maps.MVCArray(emitterData);
+
+  heatmap = new google.maps.visualization.HeatmapLayer({
+    data: pointArray
   });
 
-  d3.json('assets/state.json', function(topology) {
-    states.selectAll('path')
-    .data(topojson.feature(topology, topology.objects.state).features)
-    .enter().append('path')
-    .attr('d', path);
+  heatmap.setMap(map);
+
+}
+
+function toggleHeatmap() {
+  heatmap.setMap(heatmap.getMap() ? null : map);
+}
+
+function changeGradient() {
+  var gradient = [
+    'rgba(0, 255, 255, 0)',
+    'rgba(0, 255, 255, 1)',
+    'rgba(0, 191, 255, 1)',
+    'rgba(0, 127, 255, 1)',
+    'rgba(0, 63, 255, 1)',
+    'rgba(0, 0, 255, 1)',
+    'rgba(0, 0, 223, 1)',
+    'rgba(0, 0, 191, 1)',
+    'rgba(0, 0, 159, 1)',
+    'rgba(0, 0, 127, 1)',
+    'rgba(63, 0, 91, 1)',
+    'rgba(127, 0, 63, 1)',
+    'rgba(191, 0, 31, 1)',
+    'rgba(255, 0, 0, 1)'
+  ];
+  heatmap.setOptions({
+    gradient: heatmap.get('gradient') ? null : gradient
   });
+}
 
-	d3.json('/emitters_map', function(json) {
-	  data = json;
-	  counties.selectAll('path')
-	  .attr('class', quantize);
-	});
+function changeRadius() {
+  heatmap.setOptions({radius: heatmap.get('radius') ? null : 20});
+}
 
-	function quantize(d) {
-	  return 'q' + Math.min(8, ~~(data[d.id].ch4_emissions_co2e * 9 / 12)) + '-9';
-	}
+function changeOpacity() {
+  heatmap.setOptions({opacity: heatmap.get('opacity') ? null : 0.2});
+}
 
+google.maps.event.addDomListener(window, 'load', initialize);
 
-	// var group = svg.append('g');
-
-	// group.attr('transform', 'scale(0.3, 0.3)');
-
-	// d3.json('data/us.json', function(collection) {
-	//   group.selectAll('path')
-	//      .data(collection.features)
-	//      .enter()
-	//      .append('path')
-	//      .attr('d', d3.geo.path().projection(projection))
-	//      .attr('id', function(d){return d.properties.name;})
-	//      .style('fill', 'gray')
-	//      .style('stroke', 'white')
-	//      .style('stroke-width', 1);
-	//    }
-
-	// group.append('path')
-	// 		 .attr('d', )
-	// 		 .style('fill', 'grey')
-	// 		 .style('stroke', 'black')
-	// 		 .style('stroke-width', 1);
-
-
-
-	// Boomzilla.makeMyMap() {
-	//     svg.append('g')
-	//         .attr('class', 'counties')
-	//         .selectAll('path')
-	//         .data(topojson.feature(us, us.objects.counties).features)
-	//         .enter()
-	//         .append('path')
-	//         .attr('class', function(d) {return quantize(rateById.get(d.id));})
-	//         .attr('d', path);
-	//     svg.append('path')
-	//         .datum(topojson.mesh(us, us.objects.states, function(a, b) {return a !== b;}))
-	//         .attr('class', 'states')
-	//         .attr('d', path);
-	//     svg.selectAll('circle')
-	//        .data('assets/Emitters_2011')
-	//        .enter()
-	//        .append('circle')
-	//        .attr('cx', projection([d.latitude]))
-	//        .attr('cy', projection([d.longitude]))
-	//        .attr('r', 2)
-	//        .style('fill', 'red');
-
-	// };
-
-};
+// <script type="text/javascript">
+//   function initialize() {
+//     var mapOptions = {
+//       center: new google.maps.LatLng(37.09024, -95.712891),
+//       zoom: 8,
+//       mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
+//     var map = new google.maps.Map(document.getElementById("map-canvas"),
+//       mapOptions);
+//   }
+//   google.maps.event.addDomListener(window, 'load', initialize);
+// </script>
