@@ -1,26 +1,26 @@
 'use strict';
-'use strict';
+
 var map, pointarray, heatmap;
 
 
-var setEmitterPoints = function(data) {
-	var emitterData = [];
+// var setEmitterPoints = function(data) {
+// 	var emitterData = [];
 
-	for (var i = 0; i < data.length ; i ++ ) {
-	  emitterData.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
-	  i += 1;
-	 }
-};
+// 	for (var i = 0; i < data.length ; i ++ ) {
+// 	  emitterData.push(new google.maps.LatLng(data[i].latitude, data[i].longitude));
+// 	  i += 1;
+// 	 }
+// };
 
-$.ajax({
-  type: 'GET',
-  dataType: 'json',
-  url: '/emitters_data',
-  success: function(data){
-    alert(data);
-    setEmitterPoints(data);
-  }
-});
+// $.ajax({
+//   type: 'GET',
+//   dataType: 'json',
+//   url: '/emitters_map',
+//   success: function(data){
+//     alert(data);
+//     setEmitterPoints(data);
+//   }
+// });
 
 
 
