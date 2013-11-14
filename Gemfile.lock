@@ -47,6 +47,8 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-rails (2.0.alpha.0)
+      compass (>= 0.12.2, < 0.14)
     congress (0.1.1)
       faraday (~> 0.8.7)
       faraday_middleware (~> 0.9.0)
@@ -158,7 +160,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
-  compass
+  compass-rails (~> 2.0.alpha.0)
   congress
   d3-rails
   dotenv-rails
