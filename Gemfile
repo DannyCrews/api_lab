@@ -10,13 +10,13 @@ gem 'json'
 
 gem 'congress'
 
-gem 'compass-rails'
+gem 'compass-rails', '~> 2.0.alpha.0'
 
 gem 'zurb-foundation'
 
 gem 'pry-rails'
 
-gem 'madison', "0.3.0", github: 'mdb/madison'
+gem 'madison', '0.3.0', github: 'mdb/madison'
 
 gem 'dotenv-rails'
 
